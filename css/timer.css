@@ -1,0 +1,75 @@
+body {
+	background: rgb(31,30,31);
+	font-family: Arial, sans-serif;
+}
+
+ input {
+	margin-bottom: 5px
+}
+
+#request {
+	margin-bottom: 15px;
+}
+
+#countdown button {
+	border: .1px solid rgb(28,57,168);
+	background: rgb(28,57,168);
+	padding: 8.2px;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	font-size: 15px;
+	 -webkit-transition: 1s;
+}
+
+#countdown button:hover {
+	cursor: pointer;
+	border: .1px solid rgb(202,48,15);
+	background: rgb(202,48,15);
+	 -webkit-transition: 1s;
+}
+
+#countdown a {
+	background: rgb(28,57,168);
+	padding: 8.9px;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	font-size: 15px;
+	 -webkit-transition: 1s;
+}
+
+#countdown a:hover {
+	background: rgb(202,48,15);
+	 -webkit-transition: 1s;
+}
+
+#message-container {
+	width: auto;
+	
+    background: white;
+    padding: 5px;
+    text-align: center;
+    font-size: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  	<!-- <link rel="stylesheet" href="../css/style.css"> -->
+    <title>OBS Timer Browser Control Panel</title>
+    <link rel="stylesheet" type="text/css" href="../css/timer.css">
+       <!-- jquery -->
+    <!-- <script type="text/javascript src=../js/jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <form id="countdown">
+      <!-- <div class="show" id="message-container">0:00</div><br> -->
+      <input id="tminus" class="" placeholder="0:00" />
+      <br>
+      <input id="request" placeholder="Enter Minutes"/>
+      <br>
+      <a href="#" class="button enterTime" onClick="sendMessage()">Start</a>
+      <button type="button">Reset</button>
+    <!-- <button onClick="sendMessage()">Submit</button> -->
+    </form>
+  </body>
+
+  <script>
+  // timer
+    $('.enterTime').click(function () {
+    var reqVal = $('#request').val();
+    var parAmt = parseInt(reqVal);
+    var totalAmount = parAmt * 60;
+     $('#request').val(" ");
+    var timeloop, timeSet = function () {
+      totalAmount--;
+      var minutes = parseInt(totalAmount/60);
+      var seconds = parseInt(totalAmount%60);
+
+  // Reset timer display and reload the page if minutes and seconds = NaN
+      if(isNaN(minutes && seconds)) {
+         $(document).ready(function(){
+          location.reload(true);
+          channel.postMessage("0:00");
+        }); 
+      }
+      if(isNaN(minutes)) minutes = "0";
+      if(isNaN(seconds)) seconds = "00";
+
+  // Hide the negative sign 
+    var totalTime =  minutes + ":" + seconds ;
+      if(seconds < 0) {
+        document.getElementById('tminus').style.color = "red";
+        negSec = seconds = Math.abs(seconds);
+      };
+      if (minutes < 0){
+        negMin = minutes = Math.abs(minutes);
+      }
+      if(seconds < 10 && seconds > -10){
+        seconds = "0" + seconds;
+      };
+
+  $('#tminus').val(minutes + ":" + seconds);
+    
+  //send to broadcast channel
+    var sendMessage =
+        channel.postMessage($('#tminus').val());
+      //   if(negSec){
+      //     channel.postMessage("-" + $('#tminus').val());
+      //   };
+      }; 
+    var timeloop  = setInterval(timeSet, 1000);
+  }); //end timeset function
+  
+  // Broadcast Channel API
+    const channelName = "obsTimer";
+    const channel = new BroadcastChannel(channelName);
+    const messageContainer = document.getElementById("message-container")
+    function sendMessage(){
+      channel.postMessage("0:00");
+    };
+
+  // Reset timer (via page reload)
+    $(document).ready(function(){
+      $("button").click(function(){
+          location.reload(true);
+          channel.postMessage("0:00");
+      });
+    });
+  </script>
+</html>

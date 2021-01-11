@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  	<link rel="stylesheet" type="text/css" href="../css/timer.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>OBS Timer Display</title>
+       <!-- jquery -->
+  </head>
+  <body>
+    <form id="countdown">
+    <div id="message-container" class= "">0:00</div>
+    </form>
+  </body>
+  <script>
+    const channelName = "obsTimer";
+    const channel = new BroadcastChannel(channelName);
+    const messageContainer = document.getElementById("message-container");
+    channel.onmessage = message => {
+       messageContainer.innerHTML =  message.data;
+         };
+  // }//end countCheck
+  </script>
+</html>
