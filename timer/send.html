@@ -65,9 +65,9 @@
   //send to broadcast channel
     var sendMessage =
         channel.postMessage($('#tminus').val());
-      //   if(negSec){
-      //     channel.postMessage("-" + $('#tminus').val());
-      //   };
+        if(negSec){
+          channel.postMessage("-" + $('#tminus').val());
+        };
       }; 
     var timeloop  = setInterval(timeSet, 1000);
   }); //end timeset function
